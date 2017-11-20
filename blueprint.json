@@ -12,11 +12,138 @@
       "version": {
         "major": 0,
         "minor": 0,
-        "level": "alpha",
+        "level": "rc",
         "patch": 0
       }
-    }
+    },
+    "software": {
+      "display": {
+        "title": "wap",
+        "label": "wap"
+      }
+    },
+    "timestamp": "2017-11-20T15:03:44+11:00"
   },
   "software": {
+    "base": {
+      "name": "wap",
+      "accepts": [
+        "ManagedEngine",
+        "ManagedService"
+      ],
+      "publisher_namespace": "EnginesSystem",
+      "type_path": "wap",
+      "service_handle_field": "fqdn",
+      "parent_image": "engines/servicebase",
+      "run_as_user": "www-data",
+      "deployment_type": "worker",
+      "memory": {
+        "required": 80,
+        "recommended": 80
+      },
+      "attach_post_build": true
+    },
+    "ports": [
+      {
+        "port": "8000",
+        "external": "80",
+        "protocol": "tcp"
+      },
+      {
+        "port": "4430",
+        "external": "443",
+        "protocol": "tcp"
+      }
+    ],
+    "consumer_params": [
+      {
+        "name": "fqdn",
+        "mandatory": true,
+        "input": {
+          "type": "boolean",
+          "label": "Fqdn",
+          "title": "www.mydomain.com"
+        }
+      },
+      {
+        "name": "proto",
+        "value": "https",
+        "mandatory": true,
+        "input": {
+          "type": "select",
+          "collection": {
+            "items": {
+              "https": "HTTPS",
+              "http": "HTTP",
+              "http_https": "HTTPS and HTTP"
+            }
+          }
+        }
+      },
+      {
+        "name": "port",
+        "value": "8000",
+        "mandatory": true,
+        "input": {
+          "type": "integer",
+          "label": "port"
+        }
+      },
+      {
+        "name": "internal_dir",
+        "value": "/",
+        "input": {
+          "type": "string",
+          "label": "Internal dir"
+        }
+      },
+      {
+        "name": "public",
+        "value": "true",
+        "mandatory": true,
+        "input": {
+          "type": "boolean",
+          "label": "Publish beyond LAN"
+        }
+      },
+      {
+        "name": "engine_count",
+        "value": "1",
+        "mandatory": true,
+        "input": {
+          "type": "integer"
+        }
+      },
+      {
+        "name": "system_auth ",
+        "value": "false",
+        "input": {
+          "type": "boolean",
+          "label": "Use system auth"
+        }
+      },
+      {
+        "name": "auth_group",
+        "value": "_Engines_Builder(engine_name)",
+        "input": {
+          "type": "string",
+          "label": "Access group"
+        }
+      }
+    ],
+    "configurators": [
+      {
+        "name": "default_site",
+        "label": "Default site",
+        "set_script": {
+          "language": "sh",
+          "content": "#!/bin/bash\r\n\r\n. /home/engines/functions/params_to_env.sh\r\nPARAMS_FILE=/home/engines/scripts/configurators/saved/default_site_url\r\nparms_to_file_and_env\r\n\r\nrequired_values=\"default_site_url\"\r\ncheck_required_values    \r\n  \r\nif test  ${#default_site_url} -gt 4\r\n then  \r\n  cat /etc/nginx/templates/default_site.tmpl | sed \"/FQDN/s//$default_site_url/\" > /tmp/site.fqdn\r\n  cp /tmp/site.fqdn /etc/nginx/sites-enabled/default\r\nelse\r\n  cp /etc/nginx/templates/empty_default /etc/nginx/sites-enabled/default \t\r\nfi\r\n\r\nkill -HUP `cat /run/nginx/nginx.pid`\r\nexit 0\r\n"
+        },
+        "read_script": {
+          "language": "sh",
+          "content": "#!/bin/bash\r\n\r\n. /home/engines/functions/params_to_env.sh\r\nPARAMS_FILE=/home/engines/scripts/configurators/saved/default_site_url\r\nparms_to_file_and_env\r\n\r\nrequired_values=\"default_site_url\"\r\ncheck_required_values    \r\n  \r\nif test  ${#default_site_url} -gt 4\r\n then  \r\n  cat /etc/nginx/templates/default_site.tmpl | sed \"/FQDN/s//$default_site_url/\" > /tmp/site.fqdn\r\n  cp /tmp/site.fqdn /etc/nginx/sites-enabled/default\r\nelse\r\n  cp /etc/nginx/templates/empty_default /etc/nginx/sites-enabled/default \t\r\nfi\r\n\r\nkill -HUP `cat /run/nginx/nginx.pid`\r\nexit 0\r\n"
+        }
+      }
+    ]
   }
 }
