@@ -22,7 +22,7 @@
         "label": "wap"
       }
     },
-    "timestamp": "2017-11-23T14:19:30+11:00"
+    "timestamp": "2017-11-30T12:19:14+11:00"
   },
   "software": {
     "base": {
@@ -60,7 +60,7 @@
         "name": "fqdn",
         "mandatory": true,
         "input": {
-          "type": "boolean",
+          "type": "string",
           "label": "Fqdn",
           "title": "www.mydomain.com"
         }
@@ -102,7 +102,7 @@
         "value": "true",
         "mandatory": true,
         "input": {
-          "type": "boolean",
+          "type": "checkbox_boolean",
           "label": "Publish beyond LAN"
         }
       },
@@ -118,7 +118,7 @@
         "name": "system_auth ",
         "value": "false",
         "input": {
-          "type": "boolean",
+          "type": "checkbox_boolean",
           "label": "Use system auth"
         }
       },
