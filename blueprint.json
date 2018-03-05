@@ -2,8 +2,8 @@
   "schema": {
     "type": "service_blueprint",
     "version": {
-      "major": 1,
-      "minor": 0
+      "major": 0,
+      "minor": 1
     },
     "origin": "Engines Developer Studio 0.2"
   },
@@ -22,25 +22,23 @@
         "label": "wap"
       }
     },
-    "timestamp": "2017-11-30T12:19:14+11:00"
+    "timestamp": "2018-03-05T11:34:22+11:00"
   },
   "software": {
     "base": {
       "name": "wap",
-      "accepts": [
-        "ManagedEngine",
-        "ManagedService"
-      ],
       "publisher_namespace": "EnginesSystem",
       "type_path": "wap",
       "service_handle_field": "fqdn",
       "parent_image": "engines/servicebase",
-      "run_as_user": "www-data",
       "deployment_type": "worker",
       "memory": {
         "required": 80,
         "recommended": 80
       },
+      "run_as_user": "www-data"
+    },
+    "disposition": {
       "attach_post_build": true
     },
     "ports": [
@@ -55,6 +53,12 @@
         "protocol": "tcp"
       }
     ],
+    "consumers": {
+      "accepts": [
+        "ManagedEngine",
+        "ManagedService"
+      ]
+    },
     "consumer_params": [
       {
         "name": "fqdn",
@@ -140,8 +144,9 @@
             "name": "default_site",
             "mandatory": true,
             "input": {
-              "type": "url",
-              "label": "Default web site"
+              "type": "string",
+              "label": "Default web site",
+              "comment": "hostname only no http(s)"
             }
           }
         ],
