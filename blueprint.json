@@ -22,7 +22,7 @@
         "label": "wap"
       }
     },
-    "timestamp": "2018-03-05T11:34:22+11:00"
+    "timestamp": "2018-03-24T12:39:38+11:00"
   },
   "software": {
     "base": {
@@ -123,7 +123,7 @@
         "value": "false",
         "input": {
           "type": "checkbox_boolean",
-          "label": "Use system auth"
+          "label": "Use system auth via ldap"
         }
       },
       {
