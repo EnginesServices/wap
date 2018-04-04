@@ -22,7 +22,7 @@
         "label": "wap"
       }
     },
-    "timestamp": "2018-03-24T12:39:38+11:00"
+    "timestamp": "2018-04-04T18:21:50+10:00"
   },
   "software": {
     "base": {
@@ -79,7 +79,8 @@
             "items": {
               "https": "HTTPS",
               "http": "HTTP",
-              "http_https": "HTTPS and HTTP"
+              "https_http": "HTTPS and HTTP",
+              "http_https": "HTTP and HTTPS"
             }
           }
         }
