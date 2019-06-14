@@ -22,7 +22,7 @@
         "label": "wap"
       }
     },
-    "timestamp": "2018-04-04T18:21:50+10:00"
+    "timestamp": "2019-06-15T07:33:54+10:00"
   },
   "software": {
     "base": {
@@ -32,6 +32,8 @@
       "service_handle_field": "fqdn",
       "parent_image": "engines/servicebase",
       "deployment_type": "worker",
+      "default_stop_timeout": 0,
+      "restart_attempts": 0,
       "memory": {
         "required": 80,
         "recommended": 80
@@ -120,7 +122,7 @@
         }
       },
       {
-        "name": "system_auth ",
+        "name": "system_auth",
         "value": "false",
         "input": {
           "type": "checkbox_boolean",
@@ -133,6 +135,14 @@
         "input": {
           "type": "string",
           "label": "Access group"
+        }
+      },
+      {
+        "name": "require_client_ssl",
+        "value": "false",
+        "input": {
+          "type": "checkbox_boolean",
+          "label": "Require client ssl cert"
         }
       }
     ],
@@ -153,11 +163,11 @@
         ],
         "set_script": {
           "language": "sh",
-          "content": "#!/bin/bash\r\n\r\n. /home/engines/functions/params_to_env.sh\r\nPARAMS_FILE=/home/engines/scripts/configurators/saved/default_site_url\r\nparms_to_file_and_env\r\n\r\nrequired_values=\"default_site_url\"\r\ncheck_required_values    \r\n  \r\nif test  ${#default_site_url} -gt 4\r\n then  \r\n  cat /etc/nginx/templates/default_site.tmpl | sed \"/FQDN/s//$default_site_url/\" > /tmp/site.fqdn\r\n  cp /tmp/site.fqdn /etc/nginx/sites-enabled/default\r\nelse\r\n  cp /etc/nginx/templates/empty_default /etc/nginx/sites-enabled/default \t\r\nfi\r\n\r\nkill -HUP `cat /run/nginx/nginx.pid`\r\nexit 0\r\n"
+          "content": "#!/bin/bash\r\n\r\n. /home/engines/functions/params_to_env.sh\r\nPARAMS_FILE=/home/engines/scripts/configurators/saved/default_site\r\nparms_to_file_and_env\r\n\r\nrequired_values=\"default_site\"\r\ncheck_required_values    \r\n  \r\nif test  ${#default_site} -gt 4\r\n then  \r\n  cat /etc/nginx/templates/default_site.tmpl | sed \"/FQDN/s//default_site/\" > /tmp/site.fqdn\r\n  cp /tmp/site.fqdn /etc/nginx/sites-enabled/default\r\nelse\r\n  cp /etc/nginx/templates/empty_default /etc/nginx/sites-enabled/default \t\r\nfi\r\n\r\nkill -HUP `cat /run/nginx/nginx.pid`\r\nexit 0\r\n"
         },
         "read_script": {
           "language": "sh",
-          "content": "#!/bin/bash\r\n\r\n. /home/engines/functions/params_to_env.sh\r\nPARAMS_FILE=/home/engines/scripts/configurators/saved/default_site_url\r\nparms_to_file_and_env\r\n\r\nrequired_values=\"default_site_url\"\r\ncheck_required_values    \r\n  \r\nif test  ${#default_site_url} -gt 4\r\n then  \r\n  cat /etc/nginx/templates/default_site.tmpl | sed \"/FQDN/s//$default_site_url/\" > /tmp/site.fqdn\r\n  cp /tmp/site.fqdn /etc/nginx/sites-enabled/default\r\nelse\r\n  cp /etc/nginx/templates/empty_default /etc/nginx/sites-enabled/default \t\r\nfi\r\n\r\nkill -HUP `cat /run/nginx/nginx.pid`\r\nexit 0\r\n"
+          "content": "#!/bin/bash\r\n\r\n. /home/engines/functions/params_to_env.sh\r\nPARAMS_FILE=/home/engines/scripts/configurators/saved/default_site\r\nparms_to_file_and_env\r\n\r\nrequired_values=\"default_site\"\r\ncheck_required_values    \r\n  \r\nif test  ${#default_site} -gt 4\r\n then  \r\n  cat /etc/nginx/templates/default_site.tmpl | sed \"/FQDN/s//$default_site/\" > /tmp/site.fqdn\r\n  cp /tmp/site.fqdn /etc/nginx/sites-enabled/default\r\nelse\r\n  cp /etc/nginx/templates/empty_default /etc/nginx/sites-enabled/default \t\r\nfi\r\n\r\nkill -HUP `cat /run/nginx/nginx.pid`\r\nexit 0\r\n"
         }
       }
     ]
