@@ -22,7 +22,7 @@
         "label": "wap"
       }
     },
-    "timestamp": "2019-06-15T07:33:54+10:00"
+    "timestamp": "2019-06-19T15:20:05+10:00"
   },
   "software": {
     "base": {
@@ -143,6 +143,18 @@
         "input": {
           "type": "checkbox_boolean",
           "label": "Require client ssl cert"
+        }
+      },
+      {
+        "name": "ca_name",
+        "input": {
+          "type": "select_with_input",
+          "label": "Signing CA Name",
+          "collection": {
+            "items": {
+              "system": "System"
+            }
+          }
         }
       }
     ],
