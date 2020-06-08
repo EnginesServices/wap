@@ -22,7 +22,7 @@
         "label": "wap"
       }
     },
-    "timestamp": "2019-06-19T15:20:05+10:00"
+    "timestamp": "2020-06-09T08:53:48+10:00"
   },
   "software": {
     "base": {
@@ -38,7 +38,10 @@
         "required": 80,
         "recommended": 80
       },
-      "run_as_user": "www-data"
+      "run_as_user": "www-data",
+      "user_id": "22005",
+      "user_primary_group": "www-data",
+      "create_user": "0"
     },
     "disposition": {
       "attach_post_build": true
@@ -53,6 +56,24 @@
         "port": "4430",
         "external": "443",
         "protocol": "tcp"
+      }
+    ],
+    "scripts": {
+      "install": {
+        "content": "#!/bin/sh\r\n\r\nmkdir -p /var/lib/nginx /var/run/nginx/ \r\nchown www-data /var/lib/nginx /var/run/nginx/ /etc/nginx/sites-enabled \r\nmkdir -p /home/consumers/saved/ &&\\\r\nchown www-data -R /etc/nginx/sites-enabled /home/engines/scripts/configurators/saved  /home/consumers/saved/"
+      }
+    },
+    "system_packages": [
+      {
+        "package": "nginx"
+      }
+    ],
+    "included_files": [
+      {
+        "source": "injections",
+        "destination": "/",
+        "owner": "root",
+        "group": "www-data"
       }
     ],
     "consumers": {
