@@ -22,7 +22,7 @@
         "label": "wap"
       }
     },
-    "timestamp": "2020-06-09T09:00:48+10:00"
+    "timestamp": "2020-06-09T09:18:41+10:00"
   },
   "software": {
     "base": {
@@ -63,7 +63,7 @@
         "content": "#!/bin/sh\r\n\r\nif ! test -d /var/log/nginx\r\n then\r\n  mkdir -p  /var/log/nginx\r\nfi\r\n\t\r\nPID_FILE=/home/engines/run/nginx.pid\r\nexport PID_FILE\r\n. /home/engines/functions/trap.sh\r\n\r\n/home/engines/scripts/engine/clear_broken.sh\r\n\r\n/usr/sbin/nginx &\r\n\r\nstartup_complete\r\n\r\nwait\r\nexit_code=$?\r\n\t\r\nshutdown_complete"
       },
       "install": {
-        "content": "#!/bin/sh\r\n\r\nmkdir -p /var/lib/nginx /var/run/nginx/ \r\nchown www-data /var/lib/nginx /var/run/nginx/ /etc/nginx/sites-enabled \r\nmkdir -p /home/consumers/saved/ &&\\\r\nchown www-data -R /etc/nginx/sites-enabled /home/engines/scripts/configurators/saved  /home/consumers/saved/"
+        "content": "#!/bin/sh\r\n\r\nmkdir -p /var/lib/nginx /var/run/nginx/ \r\nchown www-data /var/lib/nginx /var/run/nginx/ /etc/nginx/sites-enabled \r\nmkdir -p /home/engines/scripts/configurators/saved/  /home/consumers/saved/\r\nchown www-data -R /etc/nginx/sites-enabled /home/engines/scripts/configurators/saved  /home/consumers/saved/"
       }
     },
     "system_packages": [
