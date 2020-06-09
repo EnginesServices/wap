@@ -17,6 +17,12 @@
       "require_client_ssl": false
     }
   },
+  "user": {
+    "identifier": "22005",
+    "name": "www-data",
+    "group": "www-data",
+    "create": false
+  },
   "stages": [
     {
       "starter": {
