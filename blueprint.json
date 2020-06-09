@@ -22,7 +22,7 @@
         "label": "wap"
       }
     },
-    "timestamp": "2020-06-09T09:18:41+10:00"
+    "timestamp": "2020-06-09T11:06:10+10:00"
   },
   "software": {
     "base": {
@@ -41,7 +41,7 @@
       "run_as_user": "www-data",
       "user_id": "22005",
       "user_primary_group": "www-data",
-      "create_user": "0"
+      "create_user": "1"
     },
     "disposition": {
       "attach_post_build": true
